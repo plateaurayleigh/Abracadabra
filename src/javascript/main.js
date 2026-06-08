@@ -77,7 +77,7 @@ export class Abracadabra {
     input,
     mode,
     key = "ABRACADABRA",
-    WenyanConfigObj = new Core.WenyanConfig(true, 50, false, false),
+    WenyanConfigObj = new Core.WenyanConfig(true, 50, [35, 80], false, false),
     AdvancedEncObj = new Core.AdvancedEncConfig(),
     callback = null
   ) {
@@ -294,7 +294,7 @@ export class Abracadabra {
     p = false,
     l = false
   ) {
-    let conf = new Core.WenyanConfig(q, r, p, l);
+    let conf = new Core.WenyanConfig(q, r, [35, 80], p, l);
     return this.WenyanInput(input, mode, key, conf);
   }
 }

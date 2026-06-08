@@ -250,6 +250,44 @@ export function getStep(key) {
   return second;
 }
 
+export class ValueNoise1D {
+  /**
+   * 工具函数
+   * 一个基于伪随机的一维值噪声生成器
+   *
+   * 在一些不适合纯随机分布的情况下适用。
+   *
+   * **/
+
+  constructor(seed = Math.random()) {
+    this.seed = seed;
+  }
+
+  // 伪随机哈希，固定输入产生固定输出
+  random(x) {
+    let n = Math.sin(x * 12.9898 + this.seed) * 43758.5453;
+    return n - Math.floor(n);
+  }
+
+  // 余弦平滑插值
+  interpolate(a, b, blend) {
+    const theta = blend * Math.PI;
+    const f = (1 - Math.cos(theta)) * 0.5;
+    return a * (1 - f) + b * f;
+  }
+
+  // 获取噪声值
+  get(x) {
+    const intX = Math.floor(x);
+    const fracX = x - intX;
+
+    const v1 = this.random(intX);
+    const v2 = this.random(intX + 1);
+
+    return this.interpolate(v1, v2, fracX);
+  }
+}
+
 export function preCheck_OLD(inp) {
   let input = String(inp);
   let size = input.length; //第一次遍历字符数组的函数，负责判断给定的输入类型。
