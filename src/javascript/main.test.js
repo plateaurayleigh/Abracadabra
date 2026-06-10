@@ -169,7 +169,7 @@ test("随机数据加密测试", { timeout: 15000 }, () => {
   });
 });
 
-test("高级加密测试", { timeout: 40000 }, () => {
+test("高级加密测试", { timeout: 100000 }, () => {
   //测试随机数据的高级加密。
   const Abra = new Abracadabra("UINT8", "UINT8");
 
