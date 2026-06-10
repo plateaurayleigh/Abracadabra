@@ -220,7 +220,7 @@ export function Enc(
       ? WenyanConfigObj.RandomIndex
       : 50,
     WenyanConfigObj.RandomPragraphing !== undefined
-      ? WenyanConfigObj.RanRandomPragraphingdomIndex
+      ? WenyanConfigObj.RandomPragraphing
       : [20, 80],
     WenyanConfigObj.PianwenMode !== undefined
       ? WenyanConfigObj.PianwenMode
