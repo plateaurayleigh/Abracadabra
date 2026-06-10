@@ -77,7 +77,7 @@ export class Abracadabra {
     input,
     mode,
     key = "ABRACADABRA",
-    WenyanConfigObj = new Core.WenyanConfig(true, 50, false, false),
+    WenyanConfigObj = new Core.WenyanConfig(true, 50, [20, 80], false, false),
     AdvancedEncObj = new Core.AdvancedEncConfig(),
     callback = null
   ) {
@@ -204,11 +204,11 @@ export class Abracadabra {
   }
 
   /**
-   * 魔曰 解密熊曰加密密文
+   * 魔曰 解密熊曰密文
    *
    * @param{string}input 输入的数据，只能是字符串
    *
-   * 解密与熊论道(熊曰加密)2020年算法更新后的密文。
+   * 解密熊曰加密。
    *
    */
 
@@ -294,7 +294,7 @@ export class Abracadabra {
     p = false,
     l = false
   ) {
-    let conf = new Core.WenyanConfig(q, r, p, l);
+    let conf = new Core.WenyanConfig(q, r, [35, 80], p, l);
     return this.WenyanInput(input, mode, key, conf);
   }
 }

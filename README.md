@@ -53,16 +53,6 @@
 - 可靠，代码经过严格单元测试。
 - 便捷，易于本地部署和使用。
 
----
-
-> 原创逆向研究，特别支持解密熊曰(与熊论道)密文。
->
-> 详情请见 [**使用提示**](https://abracadabra.js.org/document/demo-usage#熊曰解密-与熊论道) 和 [**Issue #123**](https://github.com/SheepChef/Abracadabra/issues/123)
->
-> 有关本项目中内置的熊曰解密函数，请见 [**JavaScript 部署**](https://abracadabra.js.org/document/js-deploy#beardecode-熊曰解密函数) 。
-
----
-
 ###  **熔古铸今：文言文仿真加密**
 
 > 早夏振于局而听恋，路在临驿，静星之舒，迸于夏。梦曰：“不请流也” ，星雅即灯明，雪近即城极，返林而不能放，开而不能指，镜也。
@@ -201,6 +191,14 @@ AES 加密密钥和转轮密钥是同一个，均采用哈希值。
 火星文：（不支持英文）
 
 ```
+
+---
+
+> 原创逆向研究，特别支持解密熊曰(与熊论道)密文。
+>
+> 详情请见 [**使用提示**](https://abracadabra.js.org/document/demo-usage#熊曰解密-与熊论道) 和 [**Issue #123**](https://github.com/SheepChef/Abracadabra/issues/123)
+>
+> 有关本项目中内置的熊曰解密函数，请见 [**JavaScript 部署**](https://abracadabra.js.org/document/js-deploy#beardecode-熊曰解密函数) 。
 
 ## 鸣谢
 

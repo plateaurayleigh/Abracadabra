@@ -156,7 +156,7 @@ function AES_256_CTR_HMAC_SHA256_E(
     ResultLength = ResultLength + 32;
   }
 
-  //组装数据，结构为 [密文]-[HMAC_HASH]-[密钥盐值]-[IV(上层函数添加)]-[高级加密参数]
+  //组装数据，结构为 [密文]-[HMAC_HASH]-[密钥盐值]-[IV(上层函数EncryptHandler:Encrypt添加)]-[高级加密参数(上上层函数CoreHandler:Enc添加)]
   let CipherTextLength = wordArrayToUint8Array(Enc.ciphertext).byteLength;
   ResultLength = ResultLength + CipherTextLength;
 

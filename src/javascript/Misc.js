@@ -10,24 +10,17 @@
  *
  */
 import { Base64 } from "js-base64";
-import MersenneTwister from "mersenne-twister";
+import MersenneTwister from "mersenne-twister"; //兼容性
+import { random } from "@lukeed/csprng"; //密码学安全随机数的封装
 
 const SIG_DECRYPT_JP = "桜込凪雫実沢";
 const SIG_DECRYPT_CN = "玚俟玊欤瞐珏";
 
 const NULL_STR = "孎"; //默认忽略的占位字符，一个生僻字。
 
-let array = new Uint32Array(1);
-let seed = 0;
+let MTseed = Date.now();
 
-try {
-  window.crypto.getRandomValues(array);
-  seed = array[0];
-} catch (err) {
-  seed = Date.now();
-}
-
-var MT = new MersenneTwister(seed);
+var MT = new MersenneTwister(MTseed);
 //获取密码学安全随机数，如果不支持WebCrypto API，回落到日期和时间。
 
 export class PreCheckResult {
@@ -83,7 +76,13 @@ export function Uint8ArrayTostring(fileData) {
 
 export function GetRandomIndex(length) {
   // 取随机数
-  let Rand = Math.floor(MT.random() * length);
+  let Rand;
+
+  try {
+    Rand = Math.floor((random(1).at(0) / 256) * length);
+  } catch (err) {
+    Rand = Math.floor(MT.random() * length);
+  }
 
   return Rand;
 }
@@ -249,6 +248,44 @@ export function getStep(key) {
       break;
   }
   return second;
+}
+
+export class ValueNoise1D {
+  /**
+   * 工具函数
+   * 一个基于伪随机的一维值噪声生成器
+   *
+   * 在一些不适合纯随机分布的情况下适用。
+   *
+   * **/
+
+  constructor(seed = Math.random()) {
+    this.seed = seed;
+  }
+
+  // 伪随机哈希，固定输入产生固定输出
+  random(x) {
+    let n = Math.sin(x * 12.9898 + this.seed) * 43758.5453;
+    return n - Math.floor(n);
+  }
+
+  // 余弦平滑插值
+  interpolate(a, b, blend) {
+    const theta = blend * Math.PI;
+    const f = (1 - Math.cos(theta)) * 0.5;
+    return a * (1 - f) + b * f;
+  }
+
+  // 获取噪声值
+  get(x) {
+    const intX = Math.floor(x);
+    const fracX = x - intX;
+
+    const v1 = this.random(intX);
+    const v2 = this.random(intX + 1);
+
+    return this.interpolate(v1, v2, fracX);
+  }
 }
 
 export function preCheck_OLD(inp) {
