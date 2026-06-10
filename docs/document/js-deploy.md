@@ -262,8 +262,6 @@ Abra.BearDecode(
 let Result = Abra.Output(); //获取输出，输出只会是字符串
 ```
 
-熊曰密文之解密
-
 ### Output()
 
 ```js
